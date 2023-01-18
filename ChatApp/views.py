@@ -8,6 +8,7 @@ from .serializers import *
 def HomePage(request):
     if request.method == 'POST':
         username = request.POST['username']
+        key = request.POST['key']
         room = request.POST['room']
 
         try:
@@ -15,7 +16,7 @@ def HomePage(request):
             return Response({'success': 'Room exists'})
 
         except Room.DoesNotExist:
-            new_room = Room(room_name = room)
+            new_room = Room(room_name = room, key=key)
             new_room.save()
             return Response({'success': 'Room created successfully'})
 
