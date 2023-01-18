@@ -30,7 +30,7 @@ def MessageView(request, room_name, username):
     if request.method == 'POST':
         message = request.POST['message']
 
-        print(message)
+        #print(message)
 
         new_message = Message(room=get_room, sender=username, message=message)
         new_message.save()
@@ -39,4 +39,4 @@ def MessageView(request, room_name, username):
 
     serializer = ChatSerializer(get_messages, many=True)
     
-    return Response({"success": "room gotten", "messages": serializer.data})
+    return Response({"success": "room gotten", "messages": serializer.data, "key": get_room.key})
